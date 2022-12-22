@@ -1,0 +1,23 @@
+.divCover {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.divCover img{
+    width: 90%;
+    height: 90%;
+}
+a{
+    text-decoration: none !important;
+}
+#userFullNameError, #userQualificationError, #userLocationError, #userEmailError, #userPasswordError, #userSIEmailError, #userSIPasswordError {
+    display: none;
+}
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height: 70px;
+    width: 100%;
+    text-align: center;
+}
