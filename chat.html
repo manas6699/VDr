@@ -1,30 +1,36 @@
 <!DOCTYPE html>
-<html lang="en" >
-<head>
-  <meta charset="UTF-8">
-  <title>Diagnosis Assistant</title>
-  <link rel="stylesheet" href="css/chat.css">
-  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.2/tailwind.min.css'>
-  <script src="/js/sweetalert2.js"></script>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Diagnosis Assistant</title>
+    <link rel="stylesheet" href="css/chat.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.2/tailwind.min.css"
+    />
+    <script src="/js/sweetalert2.js"></script>
+  </head>
+  <body>
+    <header class="text-gray-700 body-font border-b border-gray-200">
+      <div
+        class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center"
+      >
+        <a
+          class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0"
+          href="/"
+        >
+          <span class="ml-3 text-xl">Virtual JDr.</span>
+        </a>
 
+        <button
+          class="log-out inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+        >
+          <a href="./model.html">Log Out</a>
+        </button>
+      </div>
+    </header>
 
-</head>
-<body>
-
-<header class="text-gray-700 body-font border-b border-gray-200">
-  <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
-    <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0" href="/">
-      <span class="ml-3 text-xl">Virtual JDr.</span>
-    </a>
-    <!-- <a class="log-out" href="/model.html">Log Out</a> -->
-    <button class="log-out inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">
-      <a href="./model.html">Log Out</a>
-    </button>
-
-  </div>
-</header>
-
-<div class="content">
+    <!-- <div class="content">
   <div id="chat-contents"></div>
   <div class="chat-box"><input type="text" id="chat-message-value" autocomplete="off" placeholder="Type a message">
     <button id="submit-chat"><svg width="15" height="20" viewBox="0 0 30 21">
@@ -36,54 +42,129 @@
     <progress id="uploader" value="0" max="100">0%</progress>
     <input id="upload" class="file-upload__input" type="file" name="file-upload">
   </div> 
-</div>
+</div> -->
 
-<footer class="text-gray-700 body-font">
-  <div class="footer bg-gray-200">
-    <div class="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
-      <p class="text-gray-500 text-sm text-center sm:text-left">© 2022 Diagnosis Assistant. All Rights Reserved.
-      </p>
+    <div class="chat-bar-collapsible">
+      <button id="chat-button" type="button" class="collapsible">
+        Chat with us!
+        <i
+          id="chat-icon"
+          style="color: #fff"
+          class="fa fa-fw fa-comments-o"
+        ></i>
+      </button>
+
+      <div class="content">
+        <div class="full-chat-block">
+          <!-- Message Container -->
+          <div class="outer-container">
+            <div class="chat-container">
+              <!-- Messages -->
+              <div id="chatbox">
+                <h5 id="chat-timestamp"></h5>
+                <p id="botStarterMessage" class="botText">
+                  <span>Loading...</span>
+                  
+                </p>
+              </div>
+
+              <!-- User input box -->
+              <div class="chat-bar-input-block">
+                <div id="userInput">
+                  <input
+                    id="textInput"
+                    class="input-box"
+                    type="text"
+                    name="msg"
+                    placeholder="Tap 'Enter' to send a message"
+                  />
+                  <p></p>
+                  
+                </div>
+
+                <div class="chat-bar-icons">
+                  <a><i
+                    id="chat-icon"
+                    style="color: #333"
+                    class="fa fa-fw fa-send"
+                    onclick="sendButton()"
+                  ></i></a>
+                  <a>
+                    <i id="chat-icon" class="fa-solid fa-microphone"></i>
+                  </a>
+
+                  <a href="webcam.html"
+                    ><i id="chat-icon" class="fa-solid fa-video"></i
+                  ></a>
+
+                  <a>
+                    <i
+                    id="chat-icon"
+                    class="fa-solid fa-arrow-up-from-bracket"
+                  ></i>
+                  </a>
+                </div>
+              </div>
+
+              <div id="chat-bar-bottom">
+                <!-- <p></p> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</footer>
 
-<script  src="js/chat.js"></script>
-<script src="/js/login.js"></script>
+    <footer class="text-gray-700 body-font">
+      <div class="footer bg-gray-200">
+        <div
+          class="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row"
+        >
+          <p class="text-gray-500 text-sm text-center sm:text-left">
+            © 2022 Diagnosis Assistant. All Rights Reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
 
-<script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
-<script>
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyCInFO3VqYr3CbA2bjVniX2s-gQsjzarTI",
-    authDomain: "nlp-rl-65adb.firebaseapp.com",
-    databaseURL: "https://nlp-rl-65adb.firebaseio.com",
-    projectId: "nlp-rl-65adb",
-    storageBucket: "nlp-rl-65adb.appspot.com",
-    messagingSenderId: "419906818742"
-  };
-  firebase.initializeApp(config);
-  //-------------------------------------
-  
-  var uploader = document.getElementById('uploader');
-  var fileButton =         document.getElementById('upload');
-  fileButton.addEventListener('change', function(e){
-  var file = e.target.files[0];
-  var storageRef = firebase.storage().ref('img/'+file.name);
-  var task = storageRef.put(file);
-  task.on('state_changed', function progress(snapshot) {
-    var percentage = (snapshot.bytesTransferred/snapshot.totalBytes)*100;
-    uploader.value = percentage;
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script
+      src="https://kit.fontawesome.com/46d8bc0ef7.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="js/chat.js"></script>
+    <script src="/js/login.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyCInFO3VqYr3CbA2bjVniX2s-gQsjzarTI",
+        authDomain: "nlp-rl-65adb.firebaseapp.com",
+        databaseURL: "https://nlp-rl-65adb.firebaseio.com",
+        projectId: "nlp-rl-65adb",
+        storageBucket: "nlp-rl-65adb.appspot.com",
+        messagingSenderId: "419906818742",
+      };
+      firebase.initializeApp(config);
+      //-------------------------------------
 
-  }, function error(err) {
-
-
-  },function complete() {
-
-  });
-});  
-  
-  
-</script>
-
-</body>
+      var uploader = document.getElementById("uploader");
+      var fileButton = document.getElementById("upload");
+      fileButton.addEventListener("change", function (e) {
+        var file = e.target.files[0];
+        var storageRef = firebase.storage().ref("img/" + file.name);
+        var task = storageRef.put(file);
+        task.on(
+          "state_changed",
+          function progress(snapshot) {
+            var percentage =
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            uploader.value = percentage;
+          },
+          function error(err) {},
+          function complete() {}
+        );
+      });
+    </script>
+  </body>
 </html>
