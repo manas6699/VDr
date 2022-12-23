@@ -1,4 +1,4 @@
-// Collapsible by manas baroi (start)
+// Collapsible by Manas Baroi (start)
 var coll = document.getElementsByClassName("collapsible");
 
 for (let i = 0; i < coll.length; i++) {
